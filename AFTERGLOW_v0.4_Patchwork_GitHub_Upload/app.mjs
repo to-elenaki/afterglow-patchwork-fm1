@@ -138,6 +138,7 @@ function setScene(index) {
     button.setAttribute('aria-pressed',String(selected));
   });
   document.documentElement.style.setProperty('--accent',SCENES[scene].color);
+  $$('.module-preview').forEach(b=>b.classList.toggle('active',Number(b.dataset.scene)===scene));
   $('sceneDescription').textContent = SCENES[scene].description;
   $('sceneCode').textContent = `00${scene+1} / ${SCENES[scene].name}`;
   $('engineMode').textContent = ['GRANULAR CLOUD','DUAL ANALOG','HYBRID SHIMMER'][scene];
@@ -263,7 +264,7 @@ function setOctave(value) {
 function toggleHold() {
   hold=!hold;
   $('holdButton').classList.toggle('active',hold);
-  $('holdButton').innerHTML=hold?'<b>◆</b><small>HOLD ON</small>':'<b>∞</b><small>HOLD</small>';
+  $('holdButton').textContent=hold?'HOLD ON':'HOLD';
   $('holdButton').setAttribute('aria-pressed',String(hold));
   send({type:'hold',value:hold});
 }
@@ -273,7 +274,7 @@ function createKeyboard() {
   for (let n=0; n<27; n++) {
     const key=document.createElement('button');
     key.type='button'; key.className='piano-key'; key.dataset.relative=n;
-    if (n===13) key.style.gridColumn = '14';
+    if (n===13) key.style.gridColumn = 'auto';
     key.innerHTML=`<span>${KEY_LABELS[n]||'·'}</span>`;
     container.append(key);
   }
@@ -336,7 +337,7 @@ function panic() {
   hold=false;
   $('holdButton').classList.remove('active');
   $('holdButton').setAttribute('aria-pressed','false');
-  $('holdButton').innerHTML='<b>∞</b><small>HOLD</small>';
+  $('holdButton').textContent='HOLD';
   send({type:'panic'});
   toast('All notes and effect tails cleared');
 }
@@ -391,7 +392,7 @@ function exportRecording() {
   const url=URL.createObjectURL(blob);
   const a=document.createElement('a');
   a.href=url;
-  a.download=`afterglow-v0.3-${new Date().toISOString().replace(/[:.]/g,'-')}.wav`;
+  a.download=`afterglow-v0.4-${new Date().toISOString().replace(/[:.]/g,'-')}.wav`;
   document.body.append(a);a.click();a.remove();
   setTimeout(()=>URL.revokeObjectURL(url),60000);
   toast(`Saved ${Math.round(recordFrames/sampleRate)} seconds of stereo WAV`);
@@ -414,7 +415,7 @@ async function connectMIDI() {
         };
         total++;
       });
-      $('midiButton').textContent=total?`MIDI CONNECTED (${total})`:'MIDI: CONNECT A KEYBOARD';
+      $('midiButton').textContent=total?`MIDI ${total}`:'MIDI';
       toast(total?`${total} MIDI input${total===1?'':'s'} ready`:'MIDI permitted; no keyboard detected');
     };
     midiAccess.onstatechange=attach;
@@ -482,6 +483,7 @@ function bindUI() {
   $('octaveUp').addEventListener('click',()=>setOctave(octave+1));
   $('holdButton').addEventListener('click',toggleHold);
   $('panicButton').addEventListener('click',panic);
+  ['bankEnv','bankLfo','bankEdit','bankHome','bankSeq'].forEach((id,i)=> $(id).addEventListener('click',()=>setBank(i%2)));
   $('master').addEventListener('input',event=>{
     const value=Number(event.target.value);
     $('masterValue').textContent=`${value}%`;

@@ -1,69 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#ddd6c8">
-  <meta name="description" content="AFTERGLOW Patchwork — a playable browser synth inspired by the M-VAVE FM-1.">
-  <title>AFTERGLOW | Patchwork FM-1</title>
-  <link rel="stylesheet" href="./style.css">
-</head>
-<body>
- <main class="app-shell">
-  <header class="page-header">
-   <div class="editorial-brand"><span class="brand-icon">✳</span> AFTERGLOW <small>PATCHWORK EDITION <span> / </span> v0.3</small></div>
-   <span class="head-note">THREE WORLDS / ONE INSTRUMENT</span>
-   <button type="button" class="audio-power" id="audioButton"><span class="power-led"></span><span id="audioLabel">ENABLE AUDIO</span></button>
-  </header>
-  <section class="unit" aria-label="AFTERGLOW FM-1 style synthesizer">
-   <div class="machine-top">
-    <div class="left-bay patch-bay">
-      <div class="bay-heading"><b>M-VAVE</b><span>FM-1 / INSPIRED</span></div>
-      <div class="unit-title">A F T E R G L O W</div>
-      <div class="subtitle">different decades, same dreams.</div>
-      <div class="left-card"><span class="tiny-header">MASTER LEVEL</span><div class="slider-wrap"><input id="master" type="range" min="0" max="100" value="74" aria-label="Master volume"><output id="masterValue">74%</output></div></div>
-      <div class="left-card scene-select-box"><span class="tiny-header">SOUND WORLDS</span>
-       <div class="scene-stack" role="group" aria-label="Choose sound scene">
-        <button class="scene-card selected" data-scene="0" type="button" aria-pressed="true"><span class="scene-dot"></span><span class="scene-copy"><strong>NEBULA</strong><small>granular cloud</small></span></button>
-        <button class="scene-card" data-scene="1" type="button" aria-pressed="false"><span class="scene-dot"></span><span class="scene-copy"><strong>BLOOM</strong><small>analog warmth</small></span></button>
-        <button class="scene-card" data-scene="2" type="button" aria-pressed="false"><span class="scene-dot"></span><span class="scene-copy"><strong>HORIZON</strong><small>hybrid shimmer</small></span></button>
-       </div>
-      </div>
-      <div class="left-footer">DESIGNED FOR EXPLORATION <span>✳</span> NO FLASHING REQUIRED</div>
-    </div>
-
-    <div class="display-bay patch-bay">
-      <div class="display-engraving"><span>✦ &nbsp; GRAIN / ANALOG / AMBIENCE</span><span id="renderStatus">● AUDIO OFFLINE</span></div>
-      <div class="screen-bezel">
-       <div class="screen-top"><span>AFTERGLOW</span><span id="sceneCode">001 / NEBULA</span></div>
-       <div class="screen-display"><canvas id="scope" width="900" height="650" aria-label="Animated granular waveform display" role="img"></canvas><div class="screen-reticle" aria-hidden="true"></div></div>
-       <div class="lcd-readout"><span id="engineMode">GRANULAR CLOUD</span><span id="signalReadout">— dB</span></div>
-       <div class="screen-bottom"><span id="screenMessage">THE SPACE BETWEEN SOUNDS</span><span class="signal-indicator">◉ ◦ ◦</span></div>
-      </div>
-      <div class="screen-floor"><span>PHOSPHOR DISPLAY</span><span id="sampleRate">44.1 kHz</span><span>04 VOICES</span></div>
-      <p class="screen-caption" id="sceneDescription">Windowed grains drift across a slowly beating harmonic source.</p>
-    </div>
-
-    <div class="right-bay patch-bay">
-      <div class="module-label"><span>PARAMETER CONTROL</span><span class="module-serial">SOUND DESIGN / 07</span></div>
-      <div class="bank-controls" role="group" aria-label="Knob banks"><button class="bank-tab selected" data-bank="0" type="button" aria-pressed="true">01 / ENGINE</button><button class="bank-tab" data-bank="1" type="button" aria-pressed="false">02 / ATMOSPHERE</button></div>
-      <div id="knobGrid" class="knob-grid" role="group" aria-label="Sound parameters"></div>
-      <div class="hardware-controls">
-        <div class="button-row"><button class="hardware-button" id="resetButton" type="button"><b>↶</b><small>RESET</small></button><button class="hardware-button" id="saveButton" type="button"><b>↓</b><small>SAVE</small></button><button class="hardware-button" id="loadButton" type="button"><b>↑</b><small>LOAD</small></button><button class="hardware-button" id="panicButton" type="button"><b>✕</b><small>PANIC</small></button></div>
-        <div class="button-row"><button class="hardware-button" id="octaveDown" type="button"><b>−</b><small>OCT −</small></button><button class="hardware-button" id="octaveUp" type="button"><b>+</b><small>OCT +</small></button><button class="hardware-button" id="holdButton" type="button" aria-pressed="false"><b>∞</b><small>HOLD</small></button><button class="hardware-button rec-hardware" id="recordButton" type="button"><b class="rec-symbol">●</b><small id="recordLabel">REC</small></button></div>
-      </div>
-      <div class="bay-bottom"><span id="octaveLabel">OCTAVE 0</span><button id="midiButton" type="button" class="midi-link">MIDI CONNECT <span>↗</span></button></div>
-    </div>
-   </div>
-
-   <div class="machine-keybed" aria-label="Performance section">
-    <div class="keybed-head"><div><span class="keybed-asterisk">✴</span> TOUCH KEYBOARD <span class="keyboard-subtitle">/ 27 VELOCITY-FREE KEYS</span></div><div class="keybed-right"><span id="recordTimer">00:00</span><span class="indicator-light"></span> <span>PERFORMANCE</span></div></div>
-    <div class="keyboard-wrap"><div id="keyboard" class="keyboard" role="group" aria-label="Twenty-seven playable FM-1 style pads"></div></div>
-    <div class="keyboard-foot"><span>PLAY WITH YOUR MOUSE OR MAC KEYBOARD &nbsp; · &nbsp; A–L / W–P</span><span>SPACE <b>HOLD</b> &nbsp; [ ] <b>OCTAVE</b></span></div>
-   </div>
-  </section>
-  <footer class="site-footer"><div>AFTERGLOW / BROWSER DSP PROTOTYPE</div><div id="toast" role="status" aria-live="polite">AN ORIGINAL INSTRUMENT IN DEVELOPMENT</div><div>M-VAVE FM-1 INSPIRED / NO DEVICE CONNECTION</div></footer>
- </main>
- <script type="module" src="./app.mjs"></script>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#d9d1c0"><meta name="description" content="AFTERGLOW Patchwork — a playable FM-1 inspired browser synthesizer"><title>AFTERGLOW — Patchwork FM-1 v0.4</title><link rel="stylesheet" href="./style.css"></head><body>
+<main class="app-shell"><header class="page-header"><div class="editorial-brand">AFTERGLOW <small>THE PATCHWORK SYNTH · v0.4</small></div><button class="audio-power" type="button" id="audioButton"><span class="power-led"></span><span id="audioLabel">ENABLE AUDIO</span></button></header>
+<section class="unit" aria-label="AFTERGLOW FM-1 inspired synthesizer"><div class="machine-top">
+<div class="left-bay patch-bay"><div class="bay-heading"><b>M-VAVE</b><span>FM-1 <small>POCKET SYNTH</small></span></div><div class="left-knobs"><div class="faux-knob-wrap"><div class="faux-knob"></div><label>MASTER</label></div><div class="faux-knob-wrap"><div class="faux-knob"></div><label>SELECT</label></div><div class="faux-knob-wrap"><div class="faux-knob"></div><label>PRESETS</label></div><div class="faux-knob-wrap"><div class="faux-knob"></div><label>ALGORITHM</label></div></div><div class="volume-inline"><label for="master">MASTER LEVEL</label><input id="master" type="range" min="0" max="100" value="74"><output id="masterValue">74%</output></div><div class="side-poem">DREAM<br>SYNTH<br>PLAY<br>EXPLORE<br>REPEAT</div><div class="scene-stack" role="group" aria-label="Choose sound scene"><button class="scene-card selected" type="button" data-scene="0" aria-pressed="true"><span class="scene-dot"></span><span class="scene-copy"><strong>NEBULA</strong></span></button><button class="scene-card" type="button" data-scene="1" aria-pressed="false"><span class="scene-dot"></span><span class="scene-copy"><strong>BLOOM</strong></span></button><button class="scene-card" type="button" data-scene="2" aria-pressed="false"><span class="scene-dot"></span><span class="scene-copy"><strong>HORIZON</strong></span></button></div><div class="octave-side"><button id="octaveDown" type="button">OCT −</button><button id="octaveUp" type="button">OCT +</button></div></div>
+<div class="display-bay patch-bay"><div class="screen-bezel"><div class="screen-top"><span>AFTERGLOW</span><span id="renderStatus">● STANDBY</span></div><div class="screen-head"><span id="engineMode">GRANULAR CLOUD</span><span id="sceneCode">001 / NEBULA</span></div><div class="screen-display"><canvas id="scope" width="900" height="650" role="img" aria-label="Animated sound waveform"></canvas><div class="screen-reticle"></div></div><div class="lcd-readout"><span id="screenMessage">THE SPACE BETWEEN SOUNDS</span><span id="signalReadout">— dB</span></div><div class="display-dots">◉ &nbsp; ◯ &nbsp; ◯ &nbsp; ◯ &nbsp; ◯ &nbsp; ◯ &nbsp; ◯</div></div><p class="screen-caption" id="sceneDescription">Windowed grains drift across a slowly beating harmonic source.</p><div class="technical" id="sampleRate">44.1 kHz</div></div>
+<div class="right-bay patch-bay"><div class="bank-controls" role="group" aria-label="Parameter banks"><button class="bank-tab selected" type="button" data-bank="0" aria-pressed="true">1–4 ENGINE</button><button class="bank-tab" type="button" data-bank="1" aria-pressed="false">5–7 ATMOSPHERE</button></div><div id="knobGrid" class="knob-grid" role="group" aria-label="Sound parameters"></div><div class="hardware-controls"><div class="button-row"><button class="hardware-button" id="resetButton" type="button">FX</button><button class="hardware-button" id="loadButton" type="button">SEL</button><button class="hardware-button" id="bankEnv" type="button">ENV</button><button class="hardware-button" id="bankLfo" type="button">LFO</button><button class="hardware-button" id="panicButton" type="button">PANIC</button><button class="hardware-button" id="bankEdit" type="button">EDIT</button></div><div class="button-row"><button class="hardware-button" id="bankHome" type="button">HOME</button><button class="hardware-button" id="saveButton" type="button">SAVE</button><button class="hardware-button" id="holdButton" type="button" aria-pressed="false">HOLD</button><button class="hardware-button" id="bankSeq" type="button">SEQ</button><button class="hardware-button" id="midiButton" type="button">MIDI</button><button class="hardware-button rec-hardware" id="recordButton" type="button"><span id="recordLabel">REC</span></button></div></div><div class="bay-bottom"><span id="octaveLabel">OCTAVE 0</span><span id="recordTimer">00:00</span></div></div></div>
+<div class="machine-keybed"><div class="keybed-head"><span>27 SILICONE KEYS · PERFORMANCE</span><span class="keybed-right"><span class="indicator-light"></span> MUSIC LIVES IN BETWEEN</span></div><div id="keyboard" class="keyboard" role="group" aria-label="Twenty-seven playable FM-1 style pads"></div></div></section>
+<section class="module-gallery" aria-label="Synthesizer sound modules"><button type="button" class="module-preview active" data-scene="0"><span class="preview-heading">✧ AFTERGLOW <small>01 / GRANULAR</small></span><span class="preview-tabs">GRANULAR &nbsp; · &nbsp; ANALOG &nbsp; · &nbsp; AMBIENCE</span><span class="preview-scene">NEBULA</span><span class="preview-wave wave-green"></span><span class="preview-params">GRAIN &nbsp; DENS &nbsp; TEXTURE &nbsp; MOTION &nbsp; SPACE</span></button><button type="button" class="module-preview" data-scene="1"><span class="preview-heading">✧ AFTERGLOW <small>02 / ANALOG</small></span><span class="preview-tabs">GRANULAR &nbsp; · &nbsp; ANALOG &nbsp; · &nbsp; AMBIENCE</span><span class="preview-scene">BLOOM</span><span class="preview-wave wave-pink"></span><span class="preview-params">OSC &nbsp; DETUNE &nbsp; FILTER &nbsp; ENV &nbsp; CHORUS</span></button><button type="button" class="module-preview" data-scene="2"><span class="preview-heading">✧ AFTERGLOW <small>03 / AMBIENCE</small></span><span class="preview-tabs">GRANULAR &nbsp; · &nbsp; ANALOG &nbsp; · &nbsp; AMBIENCE</span><span class="preview-scene">HORIZON</span><span class="preview-wave wave-blue"></span><span class="preview-params">SHIMMER &nbsp; WIDTH &nbsp; MOTION &nbsp; SPACE</span></button></section>
+<footer class="site-footer"><span>AFTERGLOW · PLAY WITH MOUSE OR KEYBOARD (A–L)</span><span id="toast" aria-live="polite" role="status">AN ORIGINAL INSTRUMENT IN DEVELOPMENT</span><span>WEB PROTOTYPE · NOT DEVICE FIRMWARE</span></footer></main><script type="module" src="./app.mjs"></script></body></html>
