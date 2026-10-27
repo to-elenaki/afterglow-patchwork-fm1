@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#ddd6c8">
+  <meta name="description" content="AFTERGLOW Patchwork — a playable browser synth inspired by the M-VAVE FM-1.">
+  <title>AFTERGLOW | Patchwork FM-1</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+ <main class="app-shell">
+  <header class="page-header">
+   <div class="editorial-brand"><span class="brand-icon">✳</span> AFTERGLOW <small>PATCHWORK EDITION <span> / </span> v0.3</small></div>
+   <span class="head-note">THREE WORLDS / ONE INSTRUMENT</span>
+   <button type="button" class="audio-power" id="audioButton"><span class="power-led"></span><span id="audioLabel">ENABLE AUDIO</span></button>
+  </header>
+  <section class="unit" aria-label="AFTERGLOW FM-1 style synthesizer">
+   <div class="machine-top">
+    <div class="left-bay patch-bay">
+      <div class="bay-heading"><b>M-VAVE</b><span>FM-1 / INSPIRED</span></div>
+      <div class="unit-title">A F T E R G L O W</div>
+      <div class="subtitle">different decades, same dreams.</div>
+      <div class="left-card"><span class="tiny-header">MASTER LEVEL</span><div class="slider-wrap"><input id="master" type="range" min="0" max="100" value="74" aria-label="Master volume"><output id="masterValue">74%</output></div></div>
+      <div class="left-card scene-select-box"><span class="tiny-header">SOUND WORLDS</span>
+       <div class="scene-stack" role="group" aria-label="Choose sound scene">
+        <button class="scene-card selected" data-scene="0" type="button" aria-pressed="true"><span class="scene-dot"></span><span class="scene-copy"><strong>NEBULA</strong><small>granular cloud</small></span></button>
+        <button class="scene-card" data-scene="1" type="button" aria-pressed="false"><span class="scene-dot"></span><span class="scene-copy"><strong>BLOOM</strong><small>analog warmth</small></span></button>
+        <button class="scene-card" data-scene="2" type="button" aria-pressed="false"><span class="scene-dot"></span><span class="scene-copy"><strong>HORIZON</strong><small>hybrid shimmer</small></span></button>
+       </div>
+      </div>
+      <div class="left-footer">DESIGNED FOR EXPLORATION <span>✳</span> NO FLASHING REQUIRED</div>
+    </div>
+
+    <div class="display-bay patch-bay">
+      <div class="display-engraving"><span>✦ &nbsp; GRAIN / ANALOG / AMBIENCE</span><span id="renderStatus">● AUDIO OFFLINE</span></div>
+      <div class="screen-bezel">
+       <div class="screen-top"><span>AFTERGLOW</span><span id="sceneCode">001 / NEBULA</span></div>
+       <div class="screen-display"><canvas id="scope" width="900" height="650" aria-label="Animated granular waveform display" role="img"></canvas><div class="screen-reticle" aria-hidden="true"></div></div>
+       <div class="lcd-readout"><span id="engineMode">GRANULAR CLOUD</span><span id="signalReadout">— dB</span></div>
+       <div class="screen-bottom"><span id="screenMessage">THE SPACE BETWEEN SOUNDS</span><span class="signal-indicator">◉ ◦ ◦</span></div>
+      </div>
+      <div class="screen-floor"><span>PHOSPHOR DISPLAY</span><span id="sampleRate">44.1 kHz</span><span>04 VOICES</span></div>
+      <p class="screen-caption" id="sceneDescription">Windowed grains drift across a slowly beating harmonic source.</p>
+    </div>
+
+    <div class="right-bay patch-bay">
+      <div class="module-label"><span>PARAMETER CONTROL</span><span class="module-serial">SOUND DESIGN / 07</span></div>
+      <div class="bank-controls" role="group" aria-label="Knob banks"><button class="bank-tab selected" data-bank="0" type="button" aria-pressed="true">01 / ENGINE</button><button class="bank-tab" data-bank="1" type="button" aria-pressed="false">02 / ATMOSPHERE</button></div>
+      <div id="knobGrid" class="knob-grid" role="group" aria-label="Sound parameters"></div>
+      <div class="hardware-controls">
+        <div class="button-row"><button class="hardware-button" id="resetButton" type="button"><b>↶</b><small>RESET</small></button><button class="hardware-button" id="saveButton" type="button"><b>↓</b><small>SAVE</small></button><button class="hardware-button" id="loadButton" type="button"><b>↑</b><small>LOAD</small></button><button class="hardware-button" id="panicButton" type="button"><b>✕</b><small>PANIC</small></button></div>
+        <div class="button-row"><button class="hardware-button" id="octaveDown" type="button"><b>−</b><small>OCT −</small></button><button class="hardware-button" id="octaveUp" type="button"><b>+</b><small>OCT +</small></button><button class="hardware-button" id="holdButton" type="button" aria-pressed="false"><b>∞</b><small>HOLD</small></button><button class="hardware-button rec-hardware" id="recordButton" type="button"><b class="rec-symbol">●</b><small id="recordLabel">REC</small></button></div>
+      </div>
+      <div class="bay-bottom"><span id="octaveLabel">OCTAVE 0</span><button id="midiButton" type="button" class="midi-link">MIDI CONNECT <span>↗</span></button></div>
+    </div>
+   </div>
+
+   <div class="machine-keybed" aria-label="Performance section">
+    <div class="keybed-head"><div><span class="keybed-asterisk">✴</span> TOUCH KEYBOARD <span class="keyboard-subtitle">/ 27 VELOCITY-FREE KEYS</span></div><div class="keybed-right"><span id="recordTimer">00:00</span><span class="indicator-light"></span> <span>PERFORMANCE</span></div></div>
+    <div class="keyboard-wrap"><div id="keyboard" class="keyboard" role="group" aria-label="Twenty-seven playable FM-1 style pads"></div></div>
+    <div class="keyboard-foot"><span>PLAY WITH YOUR MOUSE OR MAC KEYBOARD &nbsp; · &nbsp; A–L / W–P</span><span>SPACE <b>HOLD</b> &nbsp; [ ] <b>OCTAVE</b></span></div>
+   </div>
+  </section>
+  <footer class="site-footer"><div>AFTERGLOW / BROWSER DSP PROTOTYPE</div><div id="toast" role="status" aria-live="polite">AN ORIGINAL INSTRUMENT IN DEVELOPMENT</div><div>M-VAVE FM-1 INSPIRED / NO DEVICE CONNECTION</div></footer>
+ </main>
+ <script type="module" src="./app.mjs"></script>
+</body>
+</html>
