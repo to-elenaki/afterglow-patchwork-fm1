@@ -1,0 +1,1 @@
+REPLACE the six files inside the existing Github folder AFTERGLOW_v0.4_Patchwork_GitHub_Upload/ on main. Commit to trigger Render auto-deploy. Do not upload the ZIP itself.
